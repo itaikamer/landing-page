@@ -1,0 +1,20 @@
+# מפתחות - לא עולים לעולם
+.env
+.env.*
+!.env.example
+
+# פרטי פניות
+leads.json
+
+# פתקים פנימיים
+CLAUDE.md
+status.md
+lessons.md
+examples.md
+
+# גרסאות ישנות
+index-v1.html
+index-v2.html
+index-v3.html
+
+node_modules/

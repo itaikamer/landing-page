@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="he" dir="rtl" class="lock">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>נתנאל סבן · תכשיטי זהב ויהלומים</title>
+<meta name="description" content="תכשיטי נתנאל סבן: זהב ויהלומים, ייצור לפי תמונה, שיבוץ ותיקונים. הדסה 54 באר שבע ושדרות התמרים 43 אילת.">
+<script>
+  document.documentElement.classList.add('js');
+  try { if (sessionStorage.getItem('nsn-in')) document.documentElement.classList.add('entered'); } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&family=Heebo:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pearl:#ebe8ef; --pearl-2:#e0dce8; --pearl-3:#d6d1e0; --ink:#0f0e13; --soft:#6b6676;
+  --pink:#f2a7e6; --violet:#a99cff; --gold:#c9a35c;
+  --display:"Karantina", "Heebo", sans-serif; --text:"Heebo", system-ui, sans-serif; --mono:"IBM Plex Mono", "Heebo", monospace;
+  --m:clamp(16px,2.2vw,32px); --gap:clamp(110px,12vw,190px);
+  --ease:cubic-bezier(.16,1,.3,1);
+  /* release settles with a touch of overshoot, like letting go of a real button */
+  --settle:cubic-bezier(.3,1.5,.5,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html.lock:not(.entered){overflow:hidden}
+body{background:var(--pearl);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.6;overflow-x:clip;overflow-anchor:none}
+/* a fine dot screen over everything, like the print on a jeweller's box */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.22;
+  background-image:radial-gradient(rgba(15,14,19,.55) .6px, transparent .8px);background-size:5px 5px}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{padding-inline:var(--m)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--m)}
+.tag{font-family:var(--mono);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 30px;border-radius:999px;background:var(--ink);color:var(--pearl);font:500 17px/1 var(--text);text-decoration:none;transition:transform .45s var(--settle),background-color .3s,color .3s;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+/* feedback lives on the press itself, not on release */
+.btn:active{transform:scale(.95);transition-duration:.08s;transition-timing-function:ease-out}
+.btn--glass{background:rgba(255,255,255,.55);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 10px 30px -12px rgba(120,90,200,.35);backdrop-filter:blur(10px)}
+.btn--glass:hover{background:#fff}
+.display{font-family:var(--display);font-weight:700;line-height:.86;letter-spacing:-.005em}
+
+/* ================= intro: load, then hold to polish ================= */
+.intro{position:fixed;inset:0;z-index:60;display:grid;grid-template-rows:1fr auto;padding:var(--m);pointer-events:none;transition:opacity .9s var(--ease),visibility .9s}
+.entered .intro,.no-gl .intro{opacity:0;visibility:hidden}
+.intro > *{pointer-events:auto}
+.load{align-self:center;display:flex;align-items:center;gap:clamp(12px,1.6vw,24px);transition:opacity .5s,transform .7s var(--ease)}
+.load .big{font-family:var(--display);font-weight:700;font-size:clamp(84px,11vw,190px);line-height:.8}
+.track{flex:1;height:clamp(56px,6.5vw,104px);border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ink);position:relative;padding:6px}
+.knob{position:absolute;top:6px;bottom:6px;aspect-ratio:1;border-radius:50%;background:var(--ink);inset-inline-start:calc(6px + (100% - 12px - (clamp(56px,6.5vw,104px) - 12px)) * var(--p,0))}
+.pct{min-width:2.6ch;text-align:left}
+.pct sup{font-size:.4em;vertical-align:top}
+.intro.ready .load{opacity:0;transform:translateY(-30px);pointer-events:none;position:absolute}
+.hold-ui{display:none;flex-direction:column;align-items:center;justify-content:space-between;height:100%;padding-block:clamp(72px,10vh,120px) 20px;text-align:center}
+.intro.ready .hold-ui{display:flex}
+.hold-ui .big{font-family:var(--display);font-weight:700;font-size:clamp(64px,8vw,140px);line-height:.85;animation:in .9s var(--ease) both}
+.hold{position:relative;width:132px;height:132px;border-radius:50%;display:grid;place-items:center;user-select:none;-webkit-user-select:none;touch-action:none;
+  background:rgba(255,255,255,.5);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px #fff,0 18px 50px -18px rgba(120,90,200,.6);transition:transform .3s var(--ease)}
+.hold:active,.hold.on{transform:scale(.93)}
+.hold svg{position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px);transform:rotate(-90deg)}
+.hold circle{fill:none;stroke-width:3}
+.hold .bg{stroke:rgba(15,14,19,.15)}
+.hold .fg{stroke:var(--ink);stroke-dasharray:440;stroke-dashoffset:calc(440 * (1 - var(--h,0)))}
+.hold span{font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.intro-foot{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.intro-foot p{font-family:var(--mono);font-size:12px;text-align:center;max-width:36ch;letter-spacing:.03em}
+.snd{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 16px 0 14px;border-radius:999px;background:var(--ink);color:var(--pearl);font-family:var(--mono);font-size:12px}
+.wave{display:inline-flex;gap:2px;align-items:center;height:14px}
+.wave i{width:2px;height:100%;background:currentColor;border-radius:2px;animation:wv 1s ease-in-out infinite;animation-delay:calc(var(--k)*-0.15s)}
+.snd[aria-pressed="false"] .wave i{animation:none;height:2px}
+@keyframes wv{50%{transform:scaleY(.25)}}
+.skip{font-family:var(--mono);font-size:13px;padding:10px 4px}
+.skip:hover{text-decoration:underline;text-underline-offset:5px}
+@keyframes in{from{opacity:0;transform:translateY(24px)}}
+
+/* ================= header ================= */
+.top{position:absolute;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:20px var(--m)}
+.mark{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;text-decoration:none;letter-spacing:.02em}
+.top nav{display:flex;gap:6px;align-items:center}
+.top nav a,.top nav button{font-family:var(--mono);font-size:13px;text-decoration:none;padding:8px 8px;border-radius:6px;transition:background-color .25s}
+.top nav a:hover,.top nav button:hover{background:rgba(255,255,255,.7)}
+.top nav button[aria-pressed="false"]{opacity:.5}
+
+/* ================= hero ================= */
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.no-gl .hero h1.sr{position:static;width:auto;height:auto;clip:auto;white-space:normal;font-family:var(--display);font-weight:700;font-size:21vw;line-height:.85;padding:18vh var(--m) 0}
+.hero-foot{position:absolute;inset:auto 0 0;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:0 var(--m) 30px}
+.hero-foot .lead{max-width:30ch;font-size:20px;line-height:1.45}
+.hero-foot .acts{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.coords{text-align:left;line-height:1.8;direction:ltr}
+.hero .side{position:absolute;top:96px;inset-inline-start:var(--m);z-index:2}
+html:not(.entered) .hero-foot,html:not(.entered) .hero .side,html:not(.entered) .top{opacity:0;visibility:hidden}
+.entered .hero-foot > *,.entered .hero .side,.entered .top{animation:in 1s var(--ease) both}
+.entered .hero-foot > :last-child{animation-delay:.12s}
+
+/* ================= categories on pedestals ================= */
+.cats{padding-block:var(--gap)}
+.sec-head{align-items:end;margin-bottom:56px}
+.sec-head h2{grid-column:1/8;font-family:var(--display);font-weight:700;font-size:clamp(72px,9vw,160px);line-height:.85}
+.sec-head p{grid-column:9/13;font-size:19px;line-height:1.5}
+.sec-head .tag{grid-column:1/13;margin-bottom:18px;color:var(--soft)}
+.cat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--m)}
+.cat{position:relative}
+.cat .stage{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#f4f2f7 0%,var(--pearl-2) 70%,#d9c8ec 100%)}
+.cat canvas{position:absolute;inset:0;width:100%;height:100%}
+.cat .tag{position:absolute;top:16px;inset-inline-start:18px;z-index:2;color:var(--soft)}
+.cat h3{font-family:var(--display);font-weight:700;font-size:clamp(44px,3.8vw,64px);line-height:.9;margin-top:22px}
+.cat p{font-size:16px;color:var(--soft);margin-top:8px;max-width:30ch}
+.cat a.more{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:13px;text-decoration:none}
+.cat a.more:hover{text-decoration:underline;text-underline-offset:5px}
+
+/* ================= ring builder ================= */
+.ring{padding-block:var(--gap);background:var(--pearl-2)}
+.ring-body{align-items:center}
+.ring-view{grid-column:1/8;position:relative;aspect-ratio:1/1;max-height:80svh;border-radius:28px;overflow:hidden;cursor:grab;touch-action:pan-y;
+  background:radial-gradient(60% 50% at 50% 60%,#fbf9fd 0%,#e9e3f2 60%,#d8cdea 100%)}
+.ring-view:active{cursor:grabbing}
+.ring-view canvas{position:absolute;inset:0;width:100%;height:100%}
+.ring-view .tag{position:absolute;bottom:18px;inset-inline-start:20px;color:var(--soft)}
+.ring-form{grid-column:9/13}
+.ring-form fieldset{border:0;margin-bottom:34px}
+.ring-form legend{font-family:var(--display);font-weight:700;font-size:46px;line-height:.9;margin-bottom:14px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.6);font-size:17px;cursor:pointer;transition:background-color .25s,color .25s,transform .45s var(--settle);-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.opts label:hover{background:#fff}
+.opts label:active{transform:scale(.93);transition-duration:.08s,.08s,.08s;transition-timing-function:ease-out}
+.opts input:checked + label{background:var(--ink);color:var(--pearl)}
+.opts input:focus-visible + label{outline:2px solid var(--ink);outline-offset:3px}
+.sw{width:16px;height:16px;border-radius:50%;background:var(--c)}
+.size-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.size-row output{font-family:var(--display);font-weight:700;font-size:54px;line-height:1}
+.ring-form input[type=range]{width:100%;accent-color:var(--ink);height:30px}
+.summary{font-size:20px;line-height:1.4;margin-bottom:22px}
+.ring-form .note{margin-top:14px;font-size:15px;color:var(--soft)}
+
+/* ================= photo to jewel ================= */
+.photo{padding-block:var(--gap)}
+.photo h2{font-family:var(--display);font-weight:700;font-size:clamp(90px,13vw,230px);line-height:.82}
+.steps{list-style:none;margin-top:80px}
+.steps li{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--m);align-items:first baseline;margin-bottom:40px}
+.steps .tag{grid-column:var(--c) / span 1;color:var(--soft)}
+.steps h3{grid-column:span 5;font-family:var(--display);font-weight:400;font-size:clamp(46px,5vw,86px);line-height:.95}
+.steps p{grid-column:span 4;font-size:17px;color:var(--soft);max-width:34ch}
+
+/* ================= repairs ================= */
+.shop{background:var(--ink);color:var(--pearl);padding-block:var(--gap)}
+.shop-grid{align-items:start}
+.shop-copy{grid-column:1/6}
+.shop h2{font-family:var(--display);font-weight:700;font-size:clamp(72px,8vw,140px);line-height:.85}
+.shop-copy p{margin-top:28px;font-size:20px;line-height:1.45;max-width:30ch;color:#cfcad8}
+.shop-list{grid-column:7/13;list-style:none}
+.shop-list li{display:flex;justify-content:space-between;align-items:baseline;gap:20px;font-family:var(--display);font-weight:400;font-size:clamp(46px,4.8vw,82px);line-height:1.04;transition:color .3s,transform .5s var(--ease)}
+.shop-list li .tag{color:#8e889a}
+.shop-list li:hover{color:var(--pink);transform:translateX(-12px)}
+
+/* ================= stores ================= */
+.stores{padding-block:var(--gap)}
+.stores > h2{font-family:var(--display);font-weight:700;font-size:clamp(72px,9vw,160px);line-height:.85;margin-bottom:64px}
+.store{grid-column:span 6}
+.store .frame{overflow:clip;border-radius:22px}
+.store img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform 1.4s var(--ease)}
+.store:hover img{transform:scale(1.05)}
+.store h3{font-family:var(--display);font-weight:700;font-size:clamp(56px,5.4vw,92px);line-height:.9;margin-top:24px}
+.store p{font-size:19px;margin-top:8px}
+.store p.tag{font-size:13px;color:var(--soft)}
+.store .acts{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.store .btn{min-height:48px;padding:0 24px;font-size:16px}
+
+/* ================= leave details ================= */
+.lead{padding-block:var(--gap);background:var(--pearl-2)}
+.lead h2{grid-column:1/7;font-family:var(--display);font-weight:700;font-size:clamp(72px,9vw,160px);line-height:.85}
+.lead .tag{color:var(--soft);margin-bottom:18px}
+.lead-form{grid-column:8/13;display:grid;gap:14px;align-content:start}
+.lead-form label{display:grid;gap:6px;font-family:var(--mono);font-size:13px;color:var(--soft)}
+.lead-form input{min-height:54px;padding:0 20px;border:0;border-radius:16px;background:rgba(255,255,255,.7);font:400 18px/1 var(--text);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9)}
+.lead-form input:focus{outline:2px solid var(--ink);outline-offset:2px;background:#fff}
+.lead-form input[type=tel],.lead-form input[type=email]{direction:ltr;text-align:right}
+.lead-form .btn{margin-top:8px}
+.lead-form .btn[disabled]{opacity:.5}
+.lead-msg{min-height:1.6em;font-size:20px;line-height:1.4}
+.lead-msg.err{color:#b3261e;font-size:16px}
+@media (max-width:820px){.lead h2,.lead-form{grid-column:1/13}.lead h2{margin-bottom:40px}}
+
+/* ================= footer ================= */
+.foot{position:relative;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding:40px var(--m) 24px;background:var(--ink);color:var(--pearl)}
+.foot-top{align-items:start}
+.foot-top h2{grid-column:1/7;font-family:var(--display);font-weight:700;font-size:clamp(64px,6.4vw,112px);line-height:.88;max-width:13ch}
+.foot-top .cols{grid-column:8/13;display:grid;grid-template-columns:1fr 1fr;gap:24px;font-size:16px;line-height:1.8}
+.cols a,.cols span{display:block;color:#a7a1b3;text-decoration:none}
+.cols :first-child{color:var(--pearl)}
+.cols a:hover{color:var(--pink)}
+.nsn{position:relative;min-height:46svh}
+.nsn canvas{position:absolute;inset:0;width:100%;height:100%}
+.legal{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:#a7a1b3}
+.legal a{color:#a7a1b3}
+
+/* ================= the jeweller's loupe ================= */
+.loupe{position:fixed;left:0;top:0;z-index:80;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;pointer-events:none;opacity:0;transform:scale(.6);transition:opacity .3s,transform .4s var(--ease);will-change:transform}
+.loupe.on{opacity:1;transform:scale(1)}
+.loupe .glass{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:var(--pearl)}
+.loupe .zoom{position:absolute;left:0;top:0;transform-origin:0 0}
+.loupe .zoom > *{position:absolute!important;left:0;top:0;margin:0!important}
+.loupe .rim{position:absolute;inset:-7px;border-radius:50%;
+  background:conic-gradient(from 200deg,#8d6a2c,#f3dc9d,#b88d3e,#fff1c9,#9c7633,#e8c77c,#8d6a2c);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));
+  box-shadow:0 20px 50px -10px rgba(40,20,80,.45)}
+.loupe .shine{position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),inset 0 -14px 30px -10px rgba(120,90,200,.35),inset 10px 14px 24px -14px rgba(255,255,255,.95)}
+.loupe .dot{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px rgba(255,255,255,.8)}
+.loupe .x{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;background:var(--ink);color:var(--pearl);padding:3px 8px;border-radius:999px;white-space:nowrap}
+html.loupe-on body,html.loupe-on a,html.loupe-on button,html.loupe-on label{cursor:none}
+html.loupe-on .ring-view{cursor:none}
+
+/* ================= the ring sheet: rises from below, follows the hand ================= */
+.sheet-back{position:fixed;inset:0;z-index:84;background:rgba(15,14,19,.38);opacity:0;visibility:hidden}
+.sheet{position:fixed;inset-inline:0;bottom:0;z-index:85;width:min(560px,100%);margin-inline:auto;padding:12px clamp(20px,4vw,34px) calc(28px + env(safe-area-inset-bottom));
+  border-radius:30px 30px 0 0;background:rgba(246,243,250,.74);backdrop-filter:blur(26px) saturate(1.7);-webkit-backdrop-filter:blur(26px) saturate(1.7);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 -20px 60px -20px rgba(60,40,110,.35);transform:translateY(110%);visibility:hidden;touch-action:none;will-change:transform}
+.sheet .grabber{width:44px;height:5px;border-radius:3px;background:rgba(15,14,19,.22);margin:0 auto 22px;cursor:grab}
+.sheet .tag{color:var(--soft)}
+.sheet h2{font-family:var(--display);font-weight:700;font-size:clamp(46px,7vw,64px);line-height:.92;margin:10px 0 14px}
+.sheet p{font-size:17px;line-height:1.5;color:var(--soft);max-width:38ch}
+.sheet .acts{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.sheet .acts .btn{flex:1;min-width:150px}
+html.sheet-open .loupe{opacity:0!important}
+html.sheet-open.loupe-on body,html.sheet-open.loupe-on a,html.sheet-open.loupe-on button{cursor:auto}
+
+/* fallbacks */
+.no-gl .hero canvas,.no-gl .nsn canvas,.no-gl .cat canvas{display:none}
+.no-gl .ring-view{display:none}
+.no-gl .ring-form{grid-column:1/13}
+
+@media (prefers-reduced-motion:no-preference){
+  .js [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform 1.1s var(--ease);transition-delay:calc(var(--d,0)*80ms)}
+  .js [data-reveal].in{opacity:1;transform:none}
+}
+@media (max-width:1000px){
+  .cat-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sec-head h2,.sec-head p{grid-column:1/13}
+  .sec-head p{margin-top:18px}
+  .ring-view,.ring-form{grid-column:1/13}
+  .ring-form{margin-top:36px}
+  .steps .tag{grid-column:1/13}
+  .steps h3,.steps p{grid-column:1/13}
+  .steps p{margin-top:8px}
+  .shop-copy,.shop-list{grid-column:1/13}
+  .shop-list{margin-top:48px}
+  .store{grid-column:1/13;margin-bottom:64px}
+  .foot-top h2,.foot-top .cols{grid-column:1/13}
+  .foot-top .cols{margin-top:32px}
+}
+@media (max-width:640px){
+  .top nav a:not(:last-of-type){display:none}
+  .load{flex-wrap:wrap;justify-content:center}
+  .load .track{flex-basis:100%;order:3}
+  .hero-foot{flex-direction:column;align-items:stretch}
+  .hero-foot .lead{font-size:17px}
+  .hero-foot .acts .btn{flex:1}
+  .coords{display:none}
+  .intro-foot p{display:none}
+  .cat-row{grid-template-columns:1fr}
+  .shop-list li{font-size:44px}
+}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+
+<div class="intro" id="intro" aria-label="כניסה לאתר">
+  <div class="load" aria-hidden="true">
+    <span class="big">טוען</span>
+    <span class="track"><i class="knob"></i></span>
+    <span class="big pct" id="pct">0<sup>%</sup></span>
+  </div>
+  <div class="hold-ui">
+    <p class="big">החזיקו<br>כדי ללטש</p>
+    <button class="hold" id="hold" aria-label="החזיקו כדי ללטש את האבן">
+      <svg viewBox="0 0 144 144" aria-hidden="true"><circle class="bg" cx="72" cy="72" r="70"/><circle class="fg" cx="72" cy="72" r="70" pathLength="440"/></svg>
+      <span>[ החזיקו ]</span>
+    </button>
+  </div>
+  <div class="intro-foot">
+    <button class="snd" id="snd" aria-pressed="true"><span class="wave" aria-hidden="true"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i></span>סאונד</button>
+    <p>כדי שהחוויה תהיה מלאה, אנחנו משתמשים בצלילים</p>
+    <button class="skip" id="skip">[ דלגו פנימה ]</button>
+  </div>
+</div>
+
+<header class="top">
+  <a class="mark" href="#">NSN</a>
+  <nav aria-label="ניווט ראשי">
+    <a href="#cats">[קולקציה]</a>
+    <a href="#ring">[הטבעת שלך]</a>
+    <a href="#shop">[תיקונים]</a>
+    <a href="#stores">[חנויות]</a>
+    <button id="loupeBtn" aria-pressed="true" hidden>[זכוכית מגדלת]</button>
+  </nav>
+</header>
+
+<main>
+<section class="hero" data-loupe aria-labelledby="hero-h">
+  <canvas id="gem" aria-hidden="true"></canvas>
+  <h1 id="hero-h" class="sr">נתנאל סבן</h1>
+  <p class="side tag">[ תכשיטי זהב ויהלומים ]</p>
+  <div class="hero-foot">
+    <div>
+      <p class="lead">מייצרים לפי תמונה, משבצים ומתקנים. זהב ויהלומים, בבאר שבע ובאילת.</p>
+      <div class="acts">
+        <a class="btn" href="#ring">לבנות טבעת</a>
+        <a class="btn btn--glass" href="tel:088606255">08-8606255</a>
+      </div>
+    </div>
+    <p class="coords tag" aria-hidden="true">31.2518° N · 34.7913° E<br>29.5577° N · 34.9519° E</p>
+  </div>
+</section>
+
+<section class="cats wrap" id="cats" data-loupe aria-labelledby="cats-h">
+  <div class="grid sec-head">
+    <p class="tag">[ 01 · מה יוצא מהסדנה ]</p>
+    <h2 id="cats-h" data-reveal>קולקציה</h2>
+    <p data-reveal style="--d:1">טבעות, שרשראות, עגילים, ושולחן העבודה של פארוק. כל אחד מהם מסתובב על הכן שלו.</p>
+  </div>
+  <div class="cat-row">
+    <article class="cat" data-reveal>
+      <div class="stage"><canvas data-obj="ring" aria-hidden="true"></canvas><span class="tag">[ 01 ]</span></div>
+      <h3>טבעות</h3>
+      <p>אירוסין, נישואין ויום־יום. בזהב צהוב, לבן או אדום.</p>
+      <a class="more" href="#ring">[ לבנות טבעת ← ]</a>
+    </article>
+    <article class="cat" data-reveal style="--d:1">
+      <div class="stage"><canvas data-obj="marquise" aria-hidden="true"></canvas><span class="tag">[ 02 ]</span></div>
+      <h3>שרשראות מרקיזה</h3>
+      <p>אבנים בחיתוך מרקיזה, האבן המחודדת משני הצדדים, על שרשרת זהב.</p>
+      <a class="more" href="tel:088606255">[ לשאול על שרשרת ← ]</a>
+    </article>
+    <article class="cat" data-reveal style="--d:2">
+      <div class="stage"><canvas data-obj="earrings" aria-hidden="true"></canvas><span class="tag">[ 03 ]</span></div>
+      <h3>עגילים</h3>
+      <p>צמודים או תלויים, עם יהלום או בזהב בלבד.</p>
+      <a class="more" href="tel:088606255">[ לשאול על עגילים ← ]</a>
+    </article>
+    <article class="cat" data-reveal style="--d:3">
+      <div class="stage"><canvas data-obj="tweezers" aria-hidden="true"></canvas><span class="tag">[ 04 ]</span></div>
+      <h3>שיבוץ ותיקונים</h3>
+      <p>נפלה אבן? התכשיט נקרע? פארוק מחזיר אותו למקום.</p>
+      <a class="more" href="#shop">[ מה מתקנים ← ]</a>
+    </article>
+  </div>
+</section>
+
+<section class="ring wrap" id="ring" data-loupe aria-labelledby="ring-h">
+  <div class="grid sec-head">
+    <p class="tag">[ 02 · הטבעת שלך ]</p>
+    <h2 id="ring-h" data-reveal>לפני שהיא קיימת</h2>
+    <p data-reveal style="--d:1">סובבו אותה באצבע, בחרו זהב ואבן, ונייצר אותה בשבילכם.</p>
+  </div>
+  <div class="grid ring-body">
+    <div class="ring-view" data-reveal>
+      <canvas id="ringc" aria-label="הדמיה תלת־ממדית של הטבעת שבחרתם" role="img"></canvas>
+      <span class="tag">[ גררו כדי לסובב ]</span>
+    </div>
+    <form class="ring-form" id="ringf" onsubmit="return false">
+      <fieldset>
+        <legend>זהב</legend>
+        <div class="opts">
+          <input type="radio" name="metal" id="m1" value="yellow" checked><label for="m1"><i class="sw" style="--c:#e2bf6b"></i>צהוב</label>
+          <input type="radio" name="metal" id="m2" value="white"><label for="m2"><i class="sw" style="--c:#dfe1e4"></i>לבן</label>
+          <input type="radio" name="metal" id="m3" value="rose"><label for="m3"><i class="sw" style="--c:#e3a587"></i>אדום</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>צורת האבן</legend>
+        <div class="opts">
+          <input type="radio" name="cut" id="c1" value="round" checked><label for="c1">עגול</label>
+          <input type="radio" name="cut" id="c2" value="oval"><label for="c2">אובל</label>
+          <input type="radio" name="cut" id="c3" value="marquise"><label for="c3">מרקיזה</label>
+          <input type="radio" name="cut" id="c4" value="princess"><label for="c4">פרינסס</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div class="size-row"><legend>גודל האבן</legend><output id="ct">1.0 קראט</output></div>
+        <input type="range" name="carat" min="0.3" max="2" step="0.1" value="1" aria-label="גודל האבן בקראט">
+      </fieldset>
+      <p class="summary" id="sum" aria-live="polite">טבעת בזהב צהוב, יהלום עגול של 1.0 קראט.</p>
+      <a class="btn" id="talk" href="tel:088606255">לדבר עם נתנאל על הטבעת הזו</a>
+      <p class="note">המחיר נקבע לפי האבן ומשקל הזהב. מתקשרים, מספרים מה בחרתם, ומקבלים הצעה.</p>
+    </form>
+  </div>
+</section>
+
+<section class="photo wrap" id="photo" data-loupe aria-labelledby="photo-h">
+  <p class="tag" style="color:var(--soft);margin-bottom:18px">[ 03 · לפי תמונה ]</p>
+  <h2 id="photo-h" data-reveal>שולחים תמונה.<br>אנחנו מייצרים.</h2>
+  <ol class="steps">
+    <li data-reveal><span class="tag" style="--c:1">[א]</span><h3>ראיתם תכשיט שאהבתם?</h3><p>שמרו תמונה שלו: מאינסטגרם, ממגזין או מהיד של חברה.</p></li>
+    <li data-reveal><span class="tag" style="--c:2">[ב]</span><h3>שלחו לנו אותה.</h3><p>באינסטגרם, בטלפון או בחנות. ספרו איזה זהב ואיזו אבן אתם רוצים.</p></li>
+    <li data-reveal><span class="tag" style="--c:3">[ג]</span><h3>והוא נעשה בשבילכם.</h3><p>התכשיט מיוצר במיוחד לפי התמונה, עם הזהב והאבנים שבחרתם.</p></li>
+  </ol>
+</section>
+
+<section class="shop" id="shop" data-loupe aria-labelledby="shop-h">
+  <div class="wrap grid shop-grid">
+    <div class="shop-copy">
+      <p class="tag" style="color:#8e889a;margin-bottom:18px">[ 04 · שולחן העבודה ]</p>
+      <h2 id="shop-h" data-reveal>נפלה אבן?<br>התכשיט נקרע?</h2>
+      <p data-reveal style="--d:1">פארוק, המשבץ שלנו, מחזיר תכשיטים לחיים. זהב, יהלומים ותיקונים, הכל במקום אחד.</p>
+    </div>
+    <ul class="shop-list">
+      <li data-reveal>שיבוץ אבנים <span class="tag">[01]</span></li>
+      <li data-reveal style="--d:1">תיקון שרשראות <span class="tag">[02]</span></li>
+      <li data-reveal style="--d:2">הקטנה והגדלה <span class="tag">[03]</span></li>
+      <li data-reveal style="--d:3">שרשראות מרקיזה <span class="tag">[04]</span></li>
+      <li data-reveal style="--d:4">ייצור לפי תמונה <span class="tag">[05]</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="stores wrap" id="stores" data-loupe aria-labelledby="stores-h">
+  <p class="tag" style="color:var(--soft);margin-bottom:18px">[ 05 · החנויות ]</p>
+  <h2 id="stores-h" data-reveal>מהנגב ועד הים</h2>
+  <div class="grid">
+    <article class="store" data-reveal>
+      <div class="frame"><img src="assets/beersheba-israel-04.jpg" width="1920" height="1080" alt="מבט מהאוויר על באר שבע בשעת ערב" loading="lazy" decoding="async"></div>
+      <h3>באר שבע</h3>
+      <p>הדסה 54, באר שבע</p>
+      <p class="tag">[ א׳–ה׳ 7:30–19:30 · ו׳ 9:00–13:00 ]</p>
+      <div class="acts">
+        <a class="btn" href="tel:088606255">08-8606255</a>
+        <a class="btn btn--glass" href="https://www.google.com/maps/search/?api=1&amp;query=%D7%94%D7%93%D7%A1%D7%94+54+%D7%91%D7%90%D7%A8+%D7%A9%D7%91%D7%A2">ניווט</a>
+      </div>
+    </article>
+    <article class="store" data-reveal style="--d:2">
+      <div class="frame"><img src="assets/eilat-coral-beach-reserve-b.jpg" width="1920" height="1440" alt="שונית האלמוגים באילת, דגים מפוספסים מעל האלמוגים במים צלולים" loading="lazy" decoding="async"></div>
+      <h3>אילת</h3>
+      <p>שדרות התמרים 43, אילת</p>
+      <p class="tag">[ שעות פתיחה: בטלפון ]</p>
+      <div class="acts">
+        <a class="btn" href="tel:088606255">08-8606255</a>
+        <a class="btn btn--glass" href="https://www.google.com/maps/search/?api=1&amp;query=%D7%A9%D7%93%D7%A8%D7%95%D7%AA+%D7%94%D7%AA%D7%9E%D7%A8%D7%99%D7%9D+43+%D7%90%D7%99%D7%9C%D7%AA">ניווט</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="lead wrap" id="lead" aria-labelledby="lead-h">
+  <p class="tag">[ 06 · השאירו פרטים ]</p>
+  <div class="grid">
+    <h2 id="lead-h" data-reveal>השאירו פרטים ונחזור אליכם</h2>
+    <form class="lead-form" id="leadf" novalidate>
+      <label>שם<input name="name" autocomplete="name" required></label>
+      <label>טלפון<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+      <label>אימייל<input name="email" type="email" autocomplete="email" required></label>
+      <button class="btn" type="submit">שליחה</button>
+      <p class="lead-msg" id="leadMsg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot" data-loupe aria-labelledby="foot-h">
+  <div class="grid foot-top">
+    <h2 id="foot-h">תכשיט שנעשה בשבילך, לא בשביל כולם</h2>
+    <div class="cols">
+      <div><span>עקבו</span><a href="https://www.instagram.com/netanel.saban.jewelry/">אינסטגרם</a><a href="https://www.threads.com/@netanel.saban.jewelry">Threads</a><a href="https://www.facebook.com/100063928786641/">פייסבוק</a></div>
+      <div><span>דברו איתנו</span><a href="tel:088606255">08-8606255</a><span>הדסה 54, באר שבע</span><span>שדרות התמרים 43, אילת</span></div>
+    </div>
+  </div>
+  <div class="nsn"><canvas id="nsnc" aria-hidden="true"></canvas></div>
+  <div class="legal">
+    <span>© 2026 תכשיטי נתנאל סבן</span>
+    <span>תמונות: <a href="https://commons.wikimedia.org/wiki/File:Beersheba,_Israel_04.jpg">באר שבע</a> ו<a href="https://commons.wikimedia.org/wiki/File:Eilat-coral-beach-reserve-b.jpg">אילת</a>, דרך Wikimedia Commons (CC BY-SA)</span>
+  </div>
+</footer>
+
+<div class="sheet-back" id="sheetBack"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" aria-hidden="true">
+  <div class="grabber" aria-hidden="true"></div>
+  <p class="tag">[ הטבעת שבחרתם ]</p>
+  <h2 id="sheet-h">טבעת בזהב צהוב, יהלום עגול של 1.0 קראט.</h2>
+  <p>מתקשרים לנתנאל, מספרים מה בחרתם, ומקבלים הצעה. המחיר נקבע לפי האבן ומשקל הזהב.</p>
+  <div class="acts">
+    <a class="btn" id="sheetCall" href="tel:088606255">להתקשר · 08-8606255</a>
+    <button class="btn btn--glass" id="sheetClose" type="button">אחר כך</button>
+  </div>
+</div>
+
+<div class="loupe" id="loupe" aria-hidden="true">
+  <div class="glass"><div class="zoom" id="zoom"></div></div>
+  <div class="shine"></div><div class="rim"></div><i class="dot"></i>
+  <span class="x">[ ×2.4 ]</span>
+</div>
+
+<script>
+// reveals, independent of WebGL
+(() => {
+  const els = document.querySelectorAll('[data-reveal]');
+  if (!('IntersectionObserver' in window)) return els.forEach(e => e.classList.add('in'));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+  els.forEach(e => io.observe(e));
+})();
+
+// leave details: sent to the local server (server.js), which answers with a personal thank-you
+(() => {
+  const form = document.getElementById('leadf'), msg = document.getElementById('leadMsg'), btn = form.querySelector('button');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    msg.className = 'lead-msg err';
+    if (!data.name.trim() || !data.phone.trim() || !data.email.trim()) return msg.textContent = 'נא למלא שם, טלפון ואימייל.';
+    btn.disabled = true;
+    try {
+      const res = await fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const out = await res.json();
+      if (!res.ok) throw new Error(out.error);
+      msg.className = 'lead-msg';
+      msg.textContent = out.message;
+      form.reset();
+    } catch (err) {
+      msg.textContent = err.message || 'השרת לא עונה. ודאו שהוא רץ (node server.js).';
+    } finally { btn.disabled = false; }
+  });
+})();
+
+// iOS only shows :active presses when a touch listener exists
+document.addEventListener('touchstart', () => {}, { passive: true });
+
+// the ring sheet: a spring, so it can be dragged, flicked and caught mid-flight
+(() => {
+  const sheet = document.getElementById('sheet'), back = document.getElementById('sheetBack');
+  const talk = document.getElementById('talk'), root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // response 0.42s, damping 0.86: settles fast with almost no bounce
+  const K = Math.pow(2 * Math.PI / 0.42, 2), C = 4 * Math.PI * 0.86 / 0.42;
+  let y = 0, v = 0, target = 0, H = 0, raf = 0, open = false, grab = null, hist = [];
+
+  function draw() {
+    sheet.style.transform = `translateY(${y}px)`;
+    const o = Math.max(0, Math.min(1, 1 - y / H));
+    back.style.opacity = o;
+    const shown = o > 0.001;
+    sheet.style.visibility = back.style.visibility = shown ? 'visible' : 'hidden';
+    root.classList.toggle('sheet-open', shown);
+  }
+  let last = 0;
+  function step(t) {
+    const dt = Math.min(0.064, (t - last) / 1000); last = t;
+    const n = Math.max(1, Math.ceil(dt / 0.004)), h = dt / n;
+    for (let i = 0; i < n; i++) { v += (-K * (y - target) - C * v) * h; y += v * h; }
+    if (Math.abs(v) < 1 && Math.abs(y - target) < 0.3) { y = target; v = 0; raf = 0; draw(); return; }
+    draw(); raf = requestAnimationFrame(step);
+  }
+  function go(to, vel) {
+    target = to;
+    if (vel != null) v = vel;
+    if (reduce) { cancelAnimationFrame(raf); raf = 0; y = to; v = 0; draw(); return; }
+    if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); }
+  }
+  function setOpen(o, vel) {
+    if (o && !open) { document.getElementById('sheet-h').textContent = document.getElementById('sum').textContent; }
+    open = o;
+    sheet.setAttribute('aria-hidden', !o);
+    go(o ? 0 : H, vel);
+    if (o) { sheet.style.visibility = 'visible'; document.getElementById('sheetCall').focus({ preventScroll: true }); }
+    else if (sheet.contains(document.activeElement)) talk.focus({ preventScroll: true });
+  }
+  const measure = () => { H = sheet.offsetHeight + 24; if (!open && !raf) { y = H; draw(); } };
+  measure(); addEventListener('resize', measure);
+
+  talk.addEventListener('click', e => { e.preventDefault(); measure(); setOpen(true); });
+  document.getElementById('sheetClose').addEventListener('click', () => setOpen(false));
+  back.addEventListener('pointerdown', () => setOpen(false));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && open) setOpen(false); });
+
+  sheet.addEventListener('pointerdown', e => {
+    if (e.target.closest('a,button')) return;
+    cancelAnimationFrame(raf); raf = 0; // catch it wherever it is right now
+    sheet.setPointerCapture(e.pointerId);
+    grab = e.clientY - y; hist = [{ y: e.clientY, t: performance.now() }];
+  });
+  sheet.addEventListener('pointermove', e => {
+    if (grab == null) return;
+    const raw = e.clientY - grab;
+    // past the top it resists like rubber
+    y = raw < 0 ? -(1 - 1 / (-raw * 0.55 / innerHeight + 1)) * innerHeight : raw;
+    const t = performance.now();
+    hist.push({ y: e.clientY, t }); hist = hist.filter(p => t - p.t < 100);
+    draw();
+  });
+  const end = () => {
+    if (grab == null) return;
+    grab = null;
+    const a = hist[0], b = hist[hist.length - 1];
+    const vel = hist.length > 1 ? (b.y - a.y) / ((b.t - a.t) / 1000 || 1) : 0;
+    // where the flick would carry it decides open or closed, not where the finger let go
+    const projected = y + (vel / 1000) * 0.99 / (1 - 0.99);
+    setOpen(projected < H / 2, vel);
+  };
+  sheet.addEventListener('pointerup', end);
+  sheet.addEventListener('pointercancel', end);
+})();
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
+const root = document.documentElement;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = (k, dt) => 1 - Math.pow(1 - k, dt * 60);
+const smooth = x => x * x * (3 - 2 * x);
+
+/* ---------------- sound: a polishing wheel and a small chime, made in the browser ---------------- */
+const snd = { on: true, ctx: null, gain: null, filter: null };
+function audioUp() {
+  if (!snd.on || snd.ctx) return;
+  const ctx = snd.ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const buf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
+  snd.filter = ctx.createBiquadFilter(); snd.filter.type = 'bandpass'; snd.filter.frequency.value = 1400; snd.filter.Q.value = 1.4;
+  snd.gain = ctx.createGain(); snd.gain.gain.value = 0;
+  src.connect(snd.filter).connect(snd.gain).connect(ctx.destination); src.start();
+}
+function polishSound(level, p) {
+  if (!snd.ctx) return;
+  const t = snd.ctx.currentTime;
+  snd.gain.gain.setTargetAtTime(snd.on ? level * 0.09 : 0, t, 0.05);
+  snd.filter.frequency.setTargetAtTime(1200 + p * 4200, t, 0.08);
+}
+function chime() {
+  if (!snd.ctx || !snd.on) return;
+  const ctx = snd.ctx, t = ctx.currentTime;
+  [1318.5, 1975.5, 2637, 3951].forEach((f, i) => {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t + i * 0.05);
+    g.gain.linearRampToValueAtTime(0.08 / (i + 1), t + i * 0.05 + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.05 + 2.4);
+    o.connect(g).connect(ctx.destination); o.start(t + i * 0.05); o.stop(t + 3);
+  });
+}
+const sndBtn = document.getElementById('snd');
+sndBtn.addEventListener('click', () => {
+  snd.on = !snd.on; sndBtn.setAttribute('aria-pressed', snd.on);
+  if (!snd.on && snd.gain) snd.gain.gain.value = 0;
+});
+
+/* ---------------- shared 3D helpers ---------------- */
+function makeRenderer(canvas, alpha) {
+  const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha, preserveDrawingBuffer: true });
+  r.setPixelRatio(Math.min(devicePixelRatio, 2));
+  r.toneMapping = THREE.ACESFilmicToneMapping;
+  r.toneMappingExposure = 1.15;
+  return r;
+}
+function roomEnv(renderer) { return new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.03).texture; }
+// a sky of many small lights: every facet catches a different one, which reads as sparkle
+function sparkleEnv(renderer, base = '#050505') {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
+  const g = c.getContext('2d');
+  g.fillStyle = base; g.fillRect(0, 0, 1024, 512);
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const tints = ['#ffffff', '#fff2dc', '#dfeaff', '#ffffff', '#ffd9f4', '#e5ddff'];
+  for (let i = 0; i < 260; i++) { g.fillStyle = tints[i % tints.length]; g.fillRect(rnd() * 1024, rnd() * 512, 4 + rnd() * 26, 4 + rnd() * 40); }
+  g.fillStyle = '#ffffff'; g.fillRect(380, 0, 260, 70);
+  g.fillStyle = '#ffd6f3'; g.fillRect(60, 160, 90, 220);
+  g.fillStyle = '#d9d2ff'; g.fillRect(820, 140, 90, 240);
+  const tex = new THREE.CanvasTexture(c);
+  tex.mapping = THREE.EquirectangularReflectionMapping; tex.colorSpace = THREE.SRGBColorSpace;
+  return new THREE.PMREMGenerator(renderer).fromEquirectangular(tex).texture;
+}
+function loop(canvas, renderer, camera, tick, onSize) {
+  let visible = false;
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
+  const size = () => {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+    onSize && onSize(w, h);
+  };
+  size(); addEventListener('resize', size);
+  const clock = new THREE.Clock();
+  renderer.setAnimationLoop(() => { const dt = Math.min(clock.getDelta(), 0.1); if (visible) tick(clock.elapsedTime, dt); });
+}
+function diamondGeometry(cut = 'round') {
+  const profile = [
+    [0.001, -0.86], [0.42, -0.5], [0.78, -0.22], [1.0, -0.03], [1.0, 0.03],
+    [0.9, 0.13], [0.76, 0.25], [0.58, 0.36], [0.001, 0.36]
+  ].map(([x, y]) => new THREE.Vector2(x, y));
+  const seg = cut === 'princess' ? 4 : cut === 'marquise' ? 28 : 24;
+  let g = new THREE.LatheGeometry(profile, seg);
+  if (cut === 'princess') g.rotateY(Math.PI / 4);
+  g = g.toNonIndexed();
+  const p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    let x = p.getX(i), z = p.getZ(i);
+    if (cut === 'princess') { x *= 1.18; z *= 1.18; }
+    if (cut === 'oval') z *= 0.72;
+    if (cut === 'marquise') { const t = Math.abs(x); z *= 0.5 * Math.pow(Math.max(0, 1 - t * t), 0.42) / 0.82; x *= 1.12; }
+    p.setXYZ(i, x, p.getY(i), z);
+  }
+  g.computeVertexNormals();
+  return g;
+}
+function sparkleGem(env) {
+  return new THREE.MeshPhysicalMaterial({
+    color: 0xf4f7ff, metalness: 0.92, roughness: 0, envMap: env, envMapIntensity: 3.2,
+    iridescence: 0.55, iridescenceIOR: 2.1, iridescenceThicknessRange: [180, 1000], flatShading: true, clearcoat: 1, clearcoatRoughness: 0
+  });
+}
+function goldMat(color = 0xe2bf6b) {
+  return new THREE.MeshPhysicalMaterial({ color, metalness: 1, roughness: 0.15, clearcoat: 0.6, clearcoatRoughness: 0.1, envMapIntensity: 1.6 });
+}
+
+try {
+  const test = document.createElement('canvas');
+  if (!(test.getContext('webgl2') || test.getContext('webgl'))) throw new Error('no webgl');
+  root.classList.add('gl');
+
+  /* ================= hero: the name, bent through a diamond ================= */
+  const hero = (() => {
+    const canvas = document.getElementById('gem');
+    const renderer = makeRenderer(canvas, false);
+    renderer.setClearColor(0xebe8ef);
+    renderer.transmissionResolutionScale = 1;
+    const scene = new THREE.Scene();
+    const env = sparkleEnv(renderer, '#2a2633');
+    scene.environment = roomEnv(renderer);
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    camera.position.set(0, 0, 7);
+
+    // the name is drawn on a plane behind the stone, so the stone can refract it
+    const tc = document.createElement('canvas');
+    const tctx = tc.getContext('2d');
+    const nameTex = new THREE.CanvasTexture(tc); nameTex.colorSpace = THREE.SRGBColorSpace;
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: nameTex, toneMapped: false }));
+    plane.position.z = -2.5; scene.add(plane);
+    function drawName(w, h) {
+      const dpr = Math.min(devicePixelRatio, 2);
+      tc.width = Math.round(w * dpr); tc.height = Math.round(h * dpr);
+      const g = tctx; g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      g.fillStyle = '#ebe8ef'; g.fillRect(0, 0, w, h);
+      g.fillStyle = 'rgba(15,14,19,.16)'; // the dot screen, so it bends inside the stone too
+      for (let y = 2; y < h; y += 5) for (let x = 2; x < w; x += 5) g.fillRect(x, y, 1, 1);
+      g.fillStyle = '#0f0e13'; g.textBaseline = 'alphabetic'; g.direction = 'rtl';
+      const narrow = w < 700;
+      const lines = narrow ? ['נתנאל', 'סבן'] : ['נתנאל סבן'];
+      let size = narrow ? w * 0.62 : w * 0.3;
+      g.font = `700 ${size}px Karantina`;
+      const widest = Math.max(...lines.map(l => g.measureText(l).width));
+      size *= (w - 2 * Math.max(16, w * 0.022)) / widest;
+      g.font = `700 ${size}px Karantina`;
+      const lh = size * 0.78, total = lh * (lines.length - 1) + size * 0.62;
+      let y = h * (narrow ? 0.4 : 0.5) - total / 2 + size * 0.62;
+      g.textAlign = 'center';
+      lines.forEach(l => { g.fillText(l, w / 2, y); y += lh; });
+      nameTex.needsUpdate = true;
+    }
+    // the plane always fills the view at its depth, wherever the camera stands
+    function fitPlane() {
+      const dist = camera.position.z - plane.position.z;
+      const ph = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * dist;
+      plane.scale.set(ph * camera.aspect, ph, 1);
+    }
+
+    const pivot = new THREE.Group(); scene.add(pivot);
+    // the finished stone: real refraction of the name behind it, plus fire
+    const gemMat = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff, metalness: 0, roughness: 0, transmission: 1, thickness: 1.6, ior: 2.42, dispersion: 4.5,
+      specularIntensity: 1, envMap: env, envMapIntensity: 2.2, flatShading: true, iridescence: 0.25, iridescenceIOR: 2.0, transparent: false
+    });
+    const diamond = new THREE.Mesh(diamondGeometry('round'), gemMat);
+    diamond.rotation.x = 0.28;
+    pivot.add(diamond);
+    // the rough stone before polishing
+    const lumpGeo = new THREE.IcosahedronGeometry(0.95, 2);
+    const lp = lumpGeo.attributes.position;
+    for (let i = 0; i < lp.count; i++) {
+      const x = lp.getX(i), y = lp.getY(i), z = lp.getZ(i);
+      const n = 1 + 0.22 * Math.sin(x * 7.1 + y * 3.3) * Math.cos(z * 5.7 - y * 2.1);
+      lp.setXYZ(i, x * n, y * n * 0.82, z * n);
+    }
+    lumpGeo.computeVertexNormals();
+    const lumpMat = new THREE.MeshStandardMaterial({ color: 0x2a2730, roughness: 0.9, metalness: 0.2, flatShading: true, transparent: true });
+    const lump = new THREE.Mesh(lumpGeo, lumpMat); pivot.add(lump);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const key = new THREE.PointLight(0xffffff, 30, 20); scene.add(key);
+    const pinkL = new THREE.PointLight(0xf2a7e6, 18, 12); pinkL.position.set(-3, -1, 3); scene.add(pinkL);
+    const violetL = new THREE.PointLight(0xa99cff, 18, 12); violetL.position.set(3, 1.5, 2); scene.add(violetL);
+
+    const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+    addEventListener('pointermove', e => { pointer.tx = e.clientX / innerWidth * 2 - 1; pointer.ty = -(e.clientY / innerHeight * 2 - 1); });
+
+    const state = { polish: root.classList.contains('entered') ? 1 : 0, shown: 0, nameIn: root.classList.contains('entered') ? 1 : 0, nameT: 0, lumpIn: 0 };
+    state.shown = state.polish;
+    let nameReady = false;
+    document.fonts.load('700 100px Karantina').finally(() => { nameReady = true; drawName(canvas.clientWidth, canvas.clientHeight); });
+
+    loop(canvas, renderer, camera, (t, dt) => {
+      state.shown = lerp(state.shown, state.polish, ease(0.12, dt));
+      const e = smooth(clamp(state.shown, 0, 1));
+      state.lumpIn = lerp(state.lumpIn, 1, ease(0.04, dt));
+      lump.scale.setScalar(lerp(0.62, 0.05, e) * state.lumpIn);
+      lumpMat.opacity = 1 - e; lump.visible = e < 0.98;
+      diamond.scale.setScalar(lerp(0.05, 1.05, e));
+      diamond.visible = e > 0.02;
+      state.nameT = lerp(state.nameT, state.nameIn, ease(0.05, dt));
+      plane.visible = nameReady;
+      plane.position.y = (1 - state.nameT) * -0.6;
+      plane.material.color.setScalar(lerp(1.0, 1, state.nameT));
+      plane.material.opacity = 1;
+      plane.material.map = state.nameT > 0.02 ? nameTex : null;
+      plane.material.color.set(state.nameT > 0.02 ? 0xffffff : 0xebe8ef);
+      plane.material.needsUpdate = true;
+
+      pointer.x = lerp(pointer.x, pointer.tx, ease(0.05, dt)); pointer.y = lerp(pointer.y, pointer.ty, ease(0.05, dt));
+      const spin = reduce ? 0 : t * 0.3;
+      pivot.rotation.y = spin + pointer.x * 0.7 + e * Math.PI * 2;
+      pivot.rotation.x = -pointer.y * 0.3;
+      camera.position.z = Math.max(7, 3.6 / (0.536 * camera.aspect));
+      fitPlane();
+      // on a phone the stone sits on the lower word instead of covering both
+      pivot.position.y = (camera.aspect < 0.8 ? -1.15 : 0.05) + (reduce ? 0 : Math.sin(t * 1.1) * 0.08);
+      key.position.set(pointer.x * 4, 3 + pointer.y * 2, 4);
+      lump.rotation.set(t * 0.2, t * 0.3, 0);
+      renderer.render(scene, camera);
+    }, (w, h) => { if (nameReady) drawName(w, h); });
+    return state;
+  })();
+
+  /* ================= intro: load, then hold to polish ================= */
+  (() => {
+    const intro = document.getElementById('intro');
+    const pctEl = document.getElementById('pct');
+    const knob = intro.querySelector('.track');
+    const holdBtn = document.getElementById('hold');
+    let p = 0, holding = false, done = false, last = performance.now();
+    if (root.classList.contains('entered')) { finish(true); return; }
+    const loadStart = performance.now();
+    function tickLoad(now) {
+      const target = Math.min(1, (now - loadStart) / 1600) * (document.fonts.status === 'loaded' ? 1 : 0.9);
+      p = Math.max(p, target);
+      pctEl.firstChild.nodeValue = Math.round(p * 100);
+      knob.style.setProperty('--p', p.toFixed(3));
+      if (p < 1) requestAnimationFrame(tickLoad); else setTimeout(() => intro.classList.add('ready'), 350);
+    }
+    requestAnimationFrame(tickLoad);
+
+    let h = 0;
+    function tickHold(now) {
+      const dt = Math.min((now - last) / 1000, 0.1); last = now;
+      if (!done) {
+        h = clamp(h + (holding ? dt / 1.8 : -dt / 0.9), 0, 1);
+        holdBtn.style.setProperty('--h', h.toFixed(3));
+        hero.polish = h;
+        polishSound(holding ? 1 : 0, h);
+        if (h >= 1) finish(false);
+      }
+      if (!done) requestAnimationFrame(tickHold);
+    }
+    requestAnimationFrame(t => { last = t; tickHold(t); });
+    const down = e => { if (e.type === 'keydown' && (e.repeat || !(e.key === ' ' || e.key === 'Enter'))) return; e.preventDefault(); audioUp(); holding = true; holdBtn.classList.add('on'); };
+    const up = () => { holding = false; holdBtn.classList.remove('on'); };
+    holdBtn.addEventListener('pointerdown', down);
+    holdBtn.addEventListener('keydown', down);
+    addEventListener('pointerup', up); addEventListener('pointercancel', up); holdBtn.addEventListener('keyup', up); holdBtn.addEventListener('pointerleave', up);
+    holdBtn.addEventListener('contextmenu', e => e.preventDefault());
+    document.getElementById('skip').addEventListener('click', () => finish(false));
+
+    function finish(silent) {
+      done = true;
+      hero.polish = 1; hero.nameIn = 1;
+      polishSound(0, 1);
+      if (!silent) chime();
+      root.classList.add('entered');
+      try { sessionStorage.setItem('nsn-in', '1'); } catch (e) {}
+      setTimeout(() => intro.remove(), 1000);
+      document.getElementById('loupeBtn').hidden = !matchMedia('(pointer: fine)').matches;
+      window.dispatchEvent(new Event('nsn-entered'));
+    }
+  })();
+
+  /* ================= pedestals ================= */
+  const safe = (name, fn) => { try { fn(); } catch (e) { console.warn(name + ' 3D failed:', e); } };
+  const builders = {
+    ring(group, env) {
+      const m = goldMat();
+      const band = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.06, 32, 120), m); band.scale.z = 1.8; group.add(band);
+      const stone = new THREE.Mesh(diamondGeometry('round'), sparkleGem(env)); stone.scale.setScalar(0.24); stone.position.y = 0.82; group.add(stone);
+      for (let i = 0; i < 4; i++) { const a = Math.PI / 4 + i * Math.PI / 2; const pr = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.026, 0.26, 8), m); pr.position.set(Math.cos(a) * 0.18, 0.72, Math.sin(a) * 0.18); group.add(pr); }
+      group.position.y = 0.15;
+    },
+    marquise(group, env) {
+      const m = goldMat(), gm = sparkleGem(env);
+      const n = 9;
+      for (let i = 0; i < n; i++) {
+        const u = i / (n - 1) * 2 - 1; // -1..1 along a V-shaped necklace
+        const x = u * 0.9, y = 0.25 - (1 - Math.abs(u) ** 1.6) * 0.75;
+        const s = new THREE.Mesh(diamondGeometry('marquise'), gm);
+        s.scale.setScalar(0.12 + (1 - Math.abs(u)) * 0.06);
+        s.position.set(x, y, 0); s.rotation.set(Math.PI / 2, 0, Math.atan2(-(1.6 * Math.sign(u) * Math.abs(u) ** 0.6) * 0.75, 0.9) + Math.PI / 2);
+        group.add(s);
+        if (i < n - 1) { const b = new THREE.Mesh(new THREE.SphereGeometry(0.03, 12, 8), m); const u2 = (i + 0.5) / (n - 1) * 2 - 1; b.position.set(u2 * 0.9, 0.25 - (1 - Math.abs(u2) ** 1.6) * 0.75, 0); group.add(b); }
+      }
+      const chain = new THREE.Mesh(new THREE.TorusGeometry(0.95, 0.012, 8, 120, Math.PI), m); chain.rotation.z = 0; chain.position.y = 0.22; group.add(chain);
+      group.scale.setScalar(0.82); group.position.y = 0.35;
+    },
+    earrings(group, env) {
+      const m = goldMat(), gm = sparkleGem(env);
+      [-0.38, 0.38].forEach(x => {
+        const hook = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.015, 10, 40, Math.PI * 1.3), m); hook.position.set(x, 0.75, 0); hook.rotation.z = -0.4; group.add(hook);
+        const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.4, 8), m); bar.position.set(x, 0.45, 0); group.add(bar);
+        const d = new THREE.Mesh(diamondGeometry('oval'), gm); d.scale.setScalar(0.2); d.rotation.x = Math.PI; d.position.set(x, 0.12, 0); group.add(d);
+      });
+      group.position.y = 0.1;
+    },
+    tweezers(group, env) {
+      const m = new THREE.MeshPhysicalMaterial({ color: 0xd9dbe2, metalness: 1, roughness: 0.22, envMapIntensity: 1.4 });
+      [-1, 1].forEach(s => {
+        const arm = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.5, 0.03), m);
+        arm.geometry.translate(0, -0.75, 0);
+        arm.position.set(0, 1.25, 0); arm.rotation.z = s * 0.1; group.add(arm);
+      });
+      const d = new THREE.Mesh(diamondGeometry('round'), sparkleGem(env)); d.scale.setScalar(0.22); d.position.set(0, -0.2, 0); d.rotation.x = 0.3; group.add(d);
+      group.position.y = 0.2;
+    }
+  };
+  document.querySelectorAll('.cat canvas').forEach(canvas => safe('pedestal', () => {
+    const renderer = makeRenderer(canvas, true);
+    const scene = new THREE.Scene();
+    scene.environment = roomEnv(renderer);
+    const env = sparkleEnv(renderer, '#4a4656');
+    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 50);
+    camera.position.set(0, 0.55, 6.6); camera.lookAt(0, 0, 0);
+    // a pearl plinth with a lit edge, like a vitrine riser
+    const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.0, 0.5, 96),
+      new THREE.MeshPhysicalMaterial({ color: 0xe9e2f4, roughness: 0.35, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.2, iridescence: 0.6, iridescenceIOR: 1.6, sheen: 1, sheenColor: 0xf2a7e6, envMapIntensity: 1 }));
+    pedestal.position.y = -1.2; scene.add(pedestal);
+    const glow = new THREE.Mesh(new THREE.TorusGeometry(0.95, 0.018, 12, 160), new THREE.MeshBasicMaterial({ color: 0xf6b8ec }));
+    glow.rotation.x = Math.PI / 2; glow.position.y = -0.95; scene.add(glow);
+    const glow2 = new THREE.Mesh(new THREE.TorusGeometry(1.0, 0.012, 12, 160), new THREE.MeshBasicMaterial({ color: 0xb7a8ff }));
+    glow2.rotation.x = Math.PI / 2; glow2.position.y = -1.45; scene.add(glow2);
+    const under = new THREE.PointLight(0xc49bff, 14, 3.2); under.position.set(0, -1.0, 1.2); scene.add(under);
+    const keyL = new THREE.DirectionalLight(0xffffff, 1.6); keyL.position.set(2, 4, 3); scene.add(keyL);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+    const obj = new THREE.Group(); scene.add(obj);
+    builders[canvas.dataset.obj](obj, env);
+    const card = canvas.closest('.cat');
+    let hover = 0, hoverT = 0;
+    card.addEventListener('pointerenter', () => hoverT = 1);
+    card.addEventListener('pointerleave', () => hoverT = 0);
+    let spin = Math.random() * 6;
+    loop(canvas, renderer, camera, (t, dt) => {
+      hover = lerp(hover, hoverT, ease(0.08, dt));
+      spin += dt * (reduce ? 0 : 0.5 + hover * 1.8);
+      obj.rotation.y = spin;
+      obj.position.y = obj.userData.baseY ?? (obj.userData.baseY = obj.position.y);
+      obj.position.y = obj.userData.baseY + (reduce ? 0 : Math.sin(t * 1.3) * 0.05) + hover * 0.12;
+      under.intensity = 14 + hover * 16;
+      renderer.render(scene, camera);
+    });
+  }));
+
+  /* ================= ring builder ================= */
+  safe('ring', () => {
+    const canvas = document.getElementById('ringc');
+    const renderer = makeRenderer(canvas, true);
+    const scene = new THREE.Scene();
+    scene.environment = roomEnv(renderer);
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    camera.position.set(0, 1.4, 6.2);
+    camera.lookAt(0, 0.35, 0);
+    const METALS = { yellow: 0xe2bf6b, white: 0xdfe2e6, rose: 0xe6a184 };
+    const metal = goldMat(METALS.yellow);
+    const ring = new THREE.Group(); scene.add(ring);
+    const band = new THREE.Mesh(new THREE.TorusGeometry(1, 0.085, 48, 160), metal); band.scale.set(1, 1, 1.9); ring.add(band);
+    const head = new THREE.Group(); head.position.y = 1.0; ring.add(head);
+    const basket = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.025, 12, 40), metal); basket.rotation.x = Math.PI / 2; basket.position.y = 0.12; head.add(basket);
+    const stone = new THREE.Mesh(diamondGeometry('round'), sparkleGem(sparkleEnv(renderer)));
+    head.add(stone);
+    const prongs = new THREE.Group(); head.add(prongs);
+    const prongGeo = new THREE.CylinderGeometry(0.03, 0.04, 1, 10);
+    const tipGeo = new THREE.SphereGeometry(0.034, 12, 8);
+    const UP = new THREE.Vector3(0, 1, 0);
+    let cut = '';
+    // a new cut swaps the stone and its prongs; size only re-lays them, so it can animate
+    function build(c) {
+      cut = c;
+      stone.geometry.dispose(); stone.geometry = diamondGeometry(c);
+      prongs.clear();
+      const n = c === 'marquise' ? 2 : 4;
+      for (let i = 0; i < n; i++) prongs.add(new THREE.Mesh(prongGeo, metal), new THREE.Mesh(tipGeo, metal));
+    }
+    function layout(s) {
+      stone.scale.setScalar(s); stone.position.y = 0.2 + s * 0.86;
+      const n = prongs.children.length / 2;
+      for (let i = 0; i < n; i++) {
+        const a = cut === 'marquise' ? i * Math.PI : Math.PI / 4 + i * Math.PI / 2;
+        const rx = cut === 'marquise' ? 1.12 : cut === 'princess' ? 1.18 * 0.71 : 1;
+        const rz = cut === 'oval' ? 0.72 : cut === 'princess' ? 1.18 * 0.71 : 1;
+        const from = new THREE.Vector3(Math.cos(a) * 0.12, 0, Math.sin(a) * 0.12);
+        const to = new THREE.Vector3(Math.cos(a) * s * rx * 0.97, stone.position.y + s * 0.16, Math.sin(a) * s * rz * 0.97);
+        const dir = to.clone().sub(from);
+        const p = prongs.children[i * 2], tip = prongs.children[i * 2 + 1];
+        p.scale.y = dir.length(); p.position.copy(from).addScaledVector(dir, 0.5);
+        p.quaternion.setFromUnitVectors(UP, dir.normalize());
+        tip.position.copy(to);
+      }
+    }
+    // stone size rides a slightly bouncy spring (response 0.38s, damping 0.62)
+    const size = { x: 0, v: 0, target: 0, K: Math.pow(2 * Math.PI / 0.38, 2), C: 4 * Math.PI * 0.62 / 0.38 };
+
+    // turning the ring by hand: 1:1 while held, keeps the flick's momentum after, and can be caught mid-spin
+    const IDLE = reduce ? 0 : 0.34; // rad/s, the slow turn of a vitrine
+    const turn = { a: 0, v: IDLE, tilt: 0, tv: 0, grab: null, hist: [] };
+    canvas.addEventListener('pointerdown', e => {
+      canvas.setPointerCapture(e.pointerId);
+      turn.grab = { x: e.clientX, y: e.clientY, a: turn.a, tilt: turn.tilt, touch: e.pointerType === 'touch' };
+      turn.v = 0; turn.tv = 0;
+      turn.hist = [{ x: e.clientX, t: performance.now() }];
+    });
+    canvas.addEventListener('pointermove', e => {
+      const g = turn.grab; if (!g) return;
+      const k = (2.4 * Math.PI) / canvas.clientWidth; // one canvas width is a bit more than a full turn
+      turn.a = g.a + (e.clientX - g.x) * k;
+      if (!g.touch) { // on a phone vertical moves belong to the page scroll
+        const raw = g.tilt + (e.clientY - g.y) * 0.004;
+        turn.tilt = 0.6 * Math.tanh(raw / 0.6); // follows the hand, then resists, never past 0.6 rad
+      }
+      const t = performance.now();
+      turn.hist.push({ x: e.clientX, t }); turn.hist = turn.hist.filter(p => t - p.t < 100);
+    });
+    const release = () => {
+      if (!turn.grab) return;
+      const h = turn.hist, k = (2.4 * Math.PI) / canvas.clientWidth;
+      const vx = h.length > 1 ? (h[h.length - 1].x - h[0].x) / ((h[h.length - 1].t - h[0].t) / 1000 || 1) : 0;
+      turn.v = reduce ? 0 : clamp(vx * k, -18, 18);
+      turn.grab = null;
+    };
+    canvas.addEventListener('pointerup', release);
+    canvas.addEventListener('pointercancel', release);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+    const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(3, 5, 4); scene.add(key);
+    const glint = new THREE.PointLight(0xffffff, 14, 10); scene.add(glint);
+    const pink = new THREE.PointLight(0xf2a7e6, 10, 8); pink.position.set(-2.5, -1, 2); scene.add(pink);
+    const form = document.getElementById('ringf');
+    const ctOut = document.getElementById('ct'), sum = document.getElementById('sum');
+    const NAMES = { yellow: 'זהב צהוב', white: 'זהב לבן', rose: 'זהב אדום', round: 'עגול', oval: 'אובל', marquise: 'מרקיזה', princess: 'פרינסס' };
+    const target = new THREE.Color(METALS.yellow);
+    function update() {
+      const f = new FormData(form);
+      const m = f.get('metal'), c = f.get('cut'), ct = parseFloat(f.get('carat'));
+      target.setHex(METALS[m]);
+      ctOut.value = ct.toFixed(1) + ' קראט';
+      if (c !== cut) build(c);
+      size.target = 0.34 * Math.cbrt(ct);
+      if (!size.x || reduce) size.x = size.target;
+      layout(size.x);
+      sum.textContent = `טבעת ב${NAMES[m]}, יהלום ${NAMES[c]} של ${ct.toFixed(1)} קראט.`;
+    }
+    form.addEventListener('input', update); update();
+    loop(canvas, renderer, camera, (t, dt) => {
+      metal.color.lerp(target, ease(0.12, dt));
+      ring.position.y = reduce ? 0 : Math.sin(t * 1.2) * 0.05;
+      glint.position.set(Math.cos(t * 1.4) * 2.5, 2.4, Math.sin(t * 1.4) * 2.5);
+      if (!turn.grab) {
+        // momentum fades back into the idle turn; tilt springs back level
+        turn.v = IDLE + (turn.v - IDLE) * Math.exp(-dt * 1.5);
+        turn.a += turn.v * dt;
+        turn.tv += (-120 * turn.tilt - 18 * turn.tv) * dt;
+        turn.tilt += turn.tv * dt;
+      }
+      ring.rotation.set(turn.tilt, turn.a, 0);
+      if (size.x !== size.target) {
+        const n = Math.max(1, Math.ceil(dt / 0.004)), h = dt / n;
+        for (let i = 0; i < n; i++) { size.v += (-size.K * (size.x - size.target) - size.C * size.v) * h; size.x += size.v * h; }
+        if (Math.abs(size.v) < 0.002 && Math.abs(size.x - size.target) < 0.0005) { size.x = size.target; size.v = 0; }
+        layout(size.x);
+      }
+      renderer.render(scene, camera);
+    });
+  });
+
+  /* ================= NSN in polished gold ================= */
+  safe('nsn', () => {
+    const canvas = document.getElementById('nsnc');
+    const renderer = makeRenderer(canvas, true);
+    const scene = new THREE.Scene();
+    scene.environment = roomEnv(renderer);
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    camera.position.set(0, 0, 9);
+    const gold = new THREE.MeshPhysicalMaterial({ color: 0xe2bf6b, metalness: 1, roughness: 0.12, clearcoat: 1, envMapIntensity: 1.8 });
+    const group = new THREE.Group(); scene.add(group);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    const l1 = new THREE.PointLight(0xffffff, 40, 20); scene.add(l1);
+    const l2 = new THREE.PointLight(0xf2a7e6, 20, 14); l2.position.set(-4, -2, 3); scene.add(l2);
+    new FontLoader().load('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/fonts/gentilis_bold.typeface.json', font => {
+      const g = new TextGeometry('NSN', { font, size: 1.6, depth: 0.42, curveSegments: 10, bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.045, bevelSegments: 5 });
+      g.center();
+      group.add(new THREE.Mesh(g, gold));
+      const d = new THREE.Mesh(diamondGeometry('round'), sparkleGem(sparkleEnv(renderer)));
+      d.scale.setScalar(0.32); d.position.set(0, 1.45, 0.2); d.rotation.x = 0.3;
+      group.add(d); group.userData.d = d;
+      fit();
+    });
+    const fit = () => { const w = canvas.clientWidth, h = canvas.clientHeight || 1; group.scale.setScalar(clamp(w / h / 2.3, 0.45, 1.4)); };
+    addEventListener('resize', fit);
+    const p = { x: 0, y: 0, tx: 0, ty: 0 };
+    addEventListener('pointermove', e => { p.tx = e.clientX / innerWidth * 2 - 1; p.ty = -(e.clientY / innerHeight * 2 - 1); });
+    loop(canvas, renderer, camera, (t, dt) => {
+      p.x = lerp(p.x, p.tx, ease(0.06, dt)); p.y = lerp(p.y, p.ty, ease(0.06, dt));
+      group.rotation.y = p.x * 0.5 + (reduce ? 0 : Math.sin(t * 0.5) * 0.15);
+      group.rotation.x = -p.y * 0.25;
+      group.position.y = reduce ? 0 : Math.sin(t * 0.9) * 0.08;
+      if (group.userData.d) group.userData.d.rotation.y = t * 0.8;
+      l1.position.set(Math.cos(t * 0.7) * 5, 2, 4 + Math.sin(t * 0.7) * 2);
+      renderer.render(scene, camera);
+    });
+  });
+} catch (err) {
+  console.warn('WebGL off:', err);
+  root.classList.add('no-gl', 'entered');
+}
+
+/* ================= the jeweller's loupe ================= */
+(() => {
+  if (!matchMedia('(pointer: fine)').matches) return;
+  const loupe = document.getElementById('loupe'), zoom = document.getElementById('zoom');
+  const btn = document.getElementById('loupeBtn');
+  const Z = 2.4, R = 95;
+  let on = true, sec = null, clone = null, pairs = [], x = -999, y = -999, active = false, raf = 0;
+  const entered = () => root.classList.contains('entered');
+  function setOn(v) {
+    on = v; btn.setAttribute('aria-pressed', v);
+    root.classList.toggle('loupe-on', v && entered());
+    if (!v) { loupe.classList.remove('on'); active = false; }
+  }
+  btn.addEventListener('click', () => setOn(!on));
+  addEventListener('nsn-entered', () => setOn(on));
+  if (entered()) { btn.hidden = false; setOn(true); }
+
+  function build(s) {
+    sec = s; zoom.textContent = ''; pairs = [];
+    if (!s) return;
+    clone = s.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+    clone.querySelectorAll('[data-reveal]').forEach(n => n.classList.add('in'));
+    clone.querySelectorAll('img').forEach(n => n.removeAttribute('loading'));
+    clone.style.width = s.offsetWidth + 'px'; clone.style.height = s.offsetHeight + 'px';
+    const origs = s.querySelectorAll('canvas'), copies = clone.querySelectorAll('canvas');
+    copies.forEach((c, i) => {
+      const flat = document.createElement('canvas');
+      flat.className = c.className; flat.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+      c.replaceWith(flat);
+      pairs.push([origs[i], flat]);
+    });
+    zoom.appendChild(clone);
+  }
+  addEventListener('input', () => { if (sec) build(sec); });
+  addEventListener('pointermove', e => {
+    x = e.clientX; y = e.clientY;
+    if (!on || !entered()) return;
+    const under = document.elementFromPoint(x, y);
+    const s = under && under.closest('[data-loupe]');
+    if (s !== sec) build(s);
+    if (!active) { active = true; loupe.classList.add('on'); frame(); }
+  }, { passive: true });
+  document.addEventListener('pointerleave', () => { active = false; loupe.classList.remove('on'); });
+  function frame() {
+    if (!active) return;
+    loupe.style.transform = `translate(${x}px, ${y}px)`;
+    loupe.style.left = '0px'; loupe.style.top = '0px';
+    if (sec) {
+      const r = sec.getBoundingClientRect();
+      zoom.style.transform = `translate(${R - (x - r.left) * Z}px, ${R - (y - r.top) * Z}px) scale(${Z})`;
+      // copy the live 3D into the lens
+      for (const [o, f] of pairs) {
+        const or = o.getBoundingClientRect();
+        if (x < or.left - R || x > or.right + R || y < or.top - R || y > or.bottom + R) continue;
+        if (f.width !== o.width || f.height !== o.height) { f.width = o.width; f.height = o.height; }
+        try { f.getContext('2d').drawImage(o, 0, 0); } catch (e) {}
+      }
+    }
+    raf = requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
