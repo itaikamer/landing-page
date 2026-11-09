@@ -19,3 +19,6 @@ index-v3.html
 
 node_modules/
 .vercel/
+
+.vercel
+.env*
