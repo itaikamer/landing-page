@@ -1,0 +1,12 @@
+.env
+.env.*
+leads.json
+server.js
+supabase-setup.sql
+CLAUDE.md
+status.md
+lessons.md
+examples.md
+index-v1.html
+index-v2.html
+index-v3.html

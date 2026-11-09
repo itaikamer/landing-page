@@ -141,10 +141,36 @@ function showSetup() {
     </div>`;
 }
 
+let password = '';
+try { password = sessionStorage.getItem('adminPass') || ''; } catch {}
+
+function showLogin(wrong) {
+  main.innerHTML = `
+    <form class="setup" id="login">
+      <h2>כניסה לדף הפניות</h2>
+      ${wrong ? '<p>הסיסמה לא נכונה. נסו שוב.</p>' : ''}
+      <input class="search" id="pass" type="password" placeholder="סיסמה" autocomplete="current-password" required>
+      <button class="refresh" style="margin-top:12px">כניסה</button>
+    </form>`;
+  document.getElementById('pass').focus();
+  document.getElementById('login').addEventListener('submit', e => {
+    e.preventDefault();
+    password = document.getElementById('pass').value;
+    try { sessionStorage.setItem('adminPass', password); } catch {}
+    load();
+  });
+}
+
 async function load() {
+  if (!password) return showLogin(false);
   try {
-    const r = await fetch('/api/leads');
+    const r = await fetch('/api/leads', { headers: { 'x-admin-password': encodeURIComponent(password) } });
     const data = await r.json();
+    if (r.status === 401) {
+      password = '';
+      try { sessionStorage.removeItem('adminPass'); } catch {}
+      return showLogin(true);
+    }
     if (data.error === 'missing-secret') return showSetup();
     if (!r.ok) throw new Error(data.error);
     leads = data.leads;

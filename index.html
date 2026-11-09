@@ -522,7 +522,7 @@ html.sheet-open.loupe-on body,html.sheet-open.loupe-on a,html.sheet-open.loupe-o
       msg.textContent = out.message;
       form.reset();
     } catch (err) {
-      msg.textContent = err.message || 'השרת לא עונה. ודאו שהוא רץ (node server.js).';
+      msg.textContent = err.message || 'השרת לא עונה. נסו שוב בעוד רגע.';
     } finally { btn.disabled = false; }
   });
 })();
