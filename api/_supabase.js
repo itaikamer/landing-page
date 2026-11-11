@@ -47,7 +47,7 @@ async function handleLeads(header) {
   const secret = process.env.SUPABASE_SECRET_KEY || '';
   if (!secret) return { status: 503, body: { error: 'missing-secret' } };
   try {
-    const r = await fetch(`${url()}/rest/v1/leads?select=id,name,phone,email,created_at&order=created_at.desc`, { headers: headersFor(secret) });
+    const r = await fetch(`${url()}/rest/v1/leads?select=id,name,phone,email,created_at,status,notes,follow_up&order=created_at.desc`, { headers: headersFor(secret) });
     if (!r.ok) throw new Error(`Supabase ${r.status}: ${await r.text()}`);
     return { status: 200, body: { leads: await r.json() } };
   } catch (err) {
@@ -56,4 +56,47 @@ async function handleLeads(header) {
   }
 }
 
-module.exports = { handleLead, handleLeads };
+// ה-CRM: מעדכנים שלב, הערה או תאריך לחזור של פנייה אחת. מחזיר { status, body } לתשובה.
+const STATUSES = ['new', 'contacted', 'meeting', 'won', 'lost'];
+async function handleUpdate(header, input) {
+  if (!isAuthorized(header)) return { status: 401, body: { error: 'unauthorized' } };
+  const secret = process.env.SUPABASE_SECRET_KEY || '';
+  if (!secret) return { status: 503, body: { error: 'missing-secret' } };
+
+  const id = Number(input?.id);
+  if (!Number.isInteger(id) || id < 1) return { status: 400, body: { error: 'פנייה לא מזוהה.' } };
+  const changes = {};
+  if ('status' in input) {
+    if (!STATUSES.includes(input.status)) return { status: 400, body: { error: 'שלב לא מוכר.' } };
+    changes.status = input.status;
+  }
+  if ('notes' in input) {
+    const notes = String(input.notes || '').trim();
+    if (notes.length > 2000) return { status: 400, body: { error: 'ההערה ארוכה מדי.' } };
+    changes.notes = notes || null;
+  }
+  if ('follow_up' in input) {
+    const d = input.follow_up || null;
+    if (d !== null && !/^\d{4}-\d{2}-\d{2}$/.test(d)) return { status: 400, body: { error: 'תאריך לא תקין.' } };
+    changes.follow_up = d;
+  }
+  if (!Object.keys(changes).length) return { status: 400, body: { error: 'אין מה לעדכן.' } };
+  changes.updated_at = new Date().toISOString();
+
+  try {
+    const r = await fetch(`${url()}/rest/v1/leads?id=eq.${id}&select=id,name,phone,email,created_at,status,notes,follow_up`, {
+      method: 'PATCH',
+      headers: { ...headersFor(secret), 'Content-Type': 'application/json', Prefer: 'return=representation' },
+      body: JSON.stringify(changes),
+    });
+    if (!r.ok) throw new Error(`Supabase ${r.status}: ${await r.text()}`);
+    const [lead] = await r.json();
+    if (!lead) return { status: 404, body: { error: 'הפנייה לא נמצאה.' } };
+    return { status: 200, body: { lead } };
+  } catch (err) {
+    console.error('עדכון ב-Supabase נכשל:', err.message);
+    return { status: 502, body: { error: 'לא הצלחנו לשמור את השינוי. נסו שוב.' } };
+  }
+}
+
+module.exports = { handleLead, handleLeads, handleUpdate };

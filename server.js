@@ -11,7 +11,7 @@ const ROOT = __dirname;
 try { process.loadEnvFile(path.join(ROOT, '.env')); } catch {}
 if (!process.env.SUPABASE_URL || !process.env.SUPABASE_KEY) console.warn('חסרים SUPABASE_URL או SUPABASE_KEY בקובץ .env - הטופס לא יישמר.');
 
-const { handleLead, handleLeads } = require('./api/_supabase');
+const { handleLead, handleLeads, handleUpdate } = require('./api/_supabase');
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.jpg': 'image/jpeg' };
 
@@ -46,6 +46,19 @@ http.createServer(async (req, res) => {
   if (req.method === 'GET' && req.url === '/api/leads') {
     const out = await handleLeads(req.headers['x-admin-password']);
     return send(res, out.status, out.body);
+  }
+
+  // ה-CRM מעדכן פנייה כאן
+  if (req.method === 'PATCH' && req.url === '/api/leads') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; if (body.length > 10000) req.destroy(); });
+    req.on('end', async () => {
+      let input;
+      try { input = JSON.parse(body); } catch { return send(res, 400, { error: 'משהו השתבש בשליחה.' }); }
+      const out = await handleUpdate(req.headers['x-admin-password'], input);
+      send(res, out.status, out.body);
+    });
+    return;
   }
 
   // כל השאר: קבצי האתר
